@@ -20,8 +20,8 @@ CREATE TABLE IF NOT EXISTS reparto (
   FOREIGN KEY(id) REFERENCES peliculas(id)
 );
 
-alter table comentarios add constraint fk_id_post foreign key (id_post) references posts(id_post) on delete cascade;
-show variables where variable_name = 'autocommit';
+/*alter table comentarios add constraint fk_id_post foreign key (id_post) references posts(id_post) on delete cascade;*/
+/*show variables where variable_name = 'autocommit';*/
 
 /*set global local_infile=1;*/
 
