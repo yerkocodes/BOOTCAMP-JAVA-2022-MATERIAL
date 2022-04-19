@@ -1,0 +1,97 @@
+CREATE DATABASE IF NOT EXISTS pcfactory;
+
+CREATE TABLE IF NOT EXISTS fabricante (
+  codigo INTEGER,
+  nombre VARCHAR(100),
+  PRIMARY KEY(codigo)
+);
+
+CREATE TABLE IF NOT EXISTS producto (
+  codigo INTEGER,
+  nombre VARCHAR(100),
+  precio DECIMAL(10,2),
+  codigo_fabricante INTEGER,
+  PRIMARY KEY(codigo),
+  FOREIGN KEY(codigo_fabricante) REFERENCES fabricante(codigo)
+);
+
+INSERT INTO fabricante VALUES(1, 'Asus');
+INSERT INTO fabricante VALUES(2, 'Lenovo');
+INSERT INTO fabricante VALUES(3, 'Hewlett-Packard');
+INSERT INTO fabricante VALUES(4, 'Samsung');
+INSERT INTO fabricante VALUES(5, 'Seagate');
+INSERT INTO fabricante VALUES(6, 'Crucial');
+INSERT INTO fabricante VALUES(7, 'Gigabyte');
+INSERT INTO fabricante VALUES(8, 'Huawei');
+INSERT INTO fabricante VALUES(9, 'Xiaomi');
+
+INSERT INTO producto VALUES(1, 'Disco duro SATA3 1TB', 50000, 5);
+INSERT INTO producto VALUES(2, 'Memoria RAM DDR4 8GB', 30000, 6);
+INSERT INTO producto VALUES(3, 'Disco SSD 1 TB', 120000, 4);
+INSERT INTO producto VALUES(4, 'GeForce GTX 1050Ti', 200000, 7);
+INSERT INTO producto VALUES(5, 'GeForce GTX 1080 Xtreme', 250000, 6);
+INSERT INTO producto VALUES(6, 'Monitor 24 LED Full HD', 150000, 1);
+INSERT INTO producto VALUES(7, 'Monitor 27 LED Full HD', 290000, 1);
+INSERT INTO producto VALUES(8, 'Portátil Yoga 520', 1200000, 2);
+INSERT INTO producto VALUES(9, 'Portátil Ideapd 320', 700000, 2);
+INSERT INTO producto VALUES(10, 'Impresora HP Deskjet 3720', 90000, 3);
+INSERT INTO producto VALUES(11, 'Impresora HP Laserjet Pro M26nw', 130000, 3);
+
+/*1.Lista el nombre de todos los productos que hay en la tabla producto.*/
+SELECT nombre AS Productos FROM producto;
+
+/*2. Lista los nombres y los precios de todos los productos de la tabla producto.*/
+SELECT nombre AS Producto, precio AS Precio FROM producto;
+
+/*3. Lista los nombres y los precios de todos los productos de la tabla producto, convirtiendo los nombres a mayúscula.*/
+SELECT UCASE(nombre) AS Producto, precio AS Precio FROM producto;
+
+/*4. Lista los nombres y los precios de todos los productos de la tabla producto, convirtiendo los nombres a minúscula.*/
+SELECT LCASE(nombre) AS Producto, precio AS Precio FROM producto;
+
+/*5. Lista el código de los fabricantes que tienen productos en la tabla producto, eliminando los códigos que aparecen repetidos.*/
+SELECT 
+  fabricante.codigo AS Codigo_fabricante, 
+  producto.nombre AS Producto 
+FROM producto 
+INNER JOIN fabricante 
+ON producto.codigo_fabricante = fabricante.codigo 
+GROUP BY Codigo_fabricante; -- ### FALTA ELIMINAR LOS CODIGOS REPETIDOS
+
+/*6. Lista los nombres de los fabricantes ordenados de forma ascendente.*/
+SELECT nombre AS Fabricante from fabricante ORDER BY Fabricante ASC;
+
+/*7. Lista los nombres de los fabricantes ordenados de forma descendente.*/
+SELECT nombre AS Fabricante from fabricante ORDER BY Fabricante DESC;
+
+/*8. Lista los nombres de los productos ordenados en primer lugar por el nombre de forma ascendente y en segundo lugar por el precio de forma descendente.*/
+SELECT nombre AS Productos, precio AS Precio FROM producto ORDER BY Productos ASC;
+SELECT nombre AS Productos, precio AS Precio FROM producto ORDER BY Precio DESC;
+
+/*9. Devuelve una lista con las 5 primeras filas de la tabla fabricante*/
+SELECT * FROM fabricante LIMIT 5;
+
+/*10. Lista todos los productos que tengan un precio entre 60.000$ y 200.000$. Utilizando el operador BETWEEN.*/
+SELECT nombre AS Producto, precio AS Precio FROM producto WHERE Precio BETWEEN 60000 AND 200000;
+
+/*11. Lista el nombre de los productos que tienen un precio mayor o igual a 400.000$.*/
+SELECT nombre AS Producto, precio AS Precio FROM producto WHERE Precio >= 400000;
+
+/*12. Lista el nombre de los productos que tienen un precio menor o igual a 120.000$.*/
+SELECT nombre AS Producto, precio AS Precio FROM producto WHERE Precio <= 120000;
+
+/*13. Lista todos los productos que tengan un precio mayor que 200.000$ y que el código de fabricante sea igual a 6.*/
+SELECT * FROM producto INNER JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo WHERE producto.codigo_fabricante = 6;
+
+/*14. Lista el nombre y el precio del producto más barato.*/
+SELECT nombre, precio FROM producto WHERE precio = ( SELECT MIN(precio) FROM producto );
+
+/*15. Lista el nombre y el precio del producto más caro.*/
+SELECT nombre, precio FROM producto WHERE precio = ( SELECT MAX(precio) FROM producto );
+
+/*16. Lista el nombre de todos los productos del fabricante cuyo código de fabricante es igual a 2.*/
+SELECT producto.nombre, producto.precio, fabricante.nombre FROM producto INNER JOIN fabricante ON producto.codigo_fabricante = fabricante.codigo WHERE fabricante.codigo = 2;
+
+/*17. Lista los nombres de los fabricantes cuyo nombre sea de 4 caracteres.*/
+SELECT nombre AS Fabricante, LENGTH(nombre) AS Cantidad_caracteres_nombre FROM fabricante WHERE LENGTH(nombre) = 4;
+
