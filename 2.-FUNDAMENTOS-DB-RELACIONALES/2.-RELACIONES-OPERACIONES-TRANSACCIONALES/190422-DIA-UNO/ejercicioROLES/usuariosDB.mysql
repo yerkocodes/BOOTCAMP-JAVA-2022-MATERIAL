@@ -1,0 +1,49 @@
+CREATE DATABASE IF NOT EXISTS usuarios;
+USE usuarios;
+
+CREATE TABLE IF NOT EXISTS rol (
+  id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(150) NOT NULL,
+  descripcion VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS usuario (
+  rut INTEGER UNSIGNED NOT NULL,
+  nombre VARCHAR(150) NOT NULL,
+  telefono INTEGER UNSIGNED NOT NULL,
+  mail VARCHAR(100) NOT NULL,
+  genero VARCHAR(1) NOT NULL COMMENT 'M to Masculine and F to Femenine',
+  fecha_nacimiento DATE NOT NULL,
+  id_rol INTEGER UNSIGNED,
+  PRIMARY KEY (rut),
+  FOREIGN KEY (id_rol) REFERENCES rol(id)
+);
+
+ALTER TABLE usuario MODIFY rut VARCHAR(12) NOT NULL;
+ALTER TABLE usuario MODIFY telefono VARCHAR(12) NOT NULL;
+SELECT DATE_FORMAT(fecha_nacimiento, '%d-%m-%y') FROM usuario;
+
+/*INSERT ROL TABLE*/
+INSERT INTO rol ( nombre, descripcion )
+VALUES
+( 'administrador', 'Control total' ),
+( 'marketing', 'Editar y crear anuncios' ),
+( 'editor', 'Editar artículos' ),
+( 'subscriptor', 'Leer artículos' );
+
+/*INSERT USUARIO TABLE*/
+INSERT INTO usuario ( rut, nombre, telefono, mail, genero, fecha_nacimiento, id_rol )
+VALUES
+( '11.111.111-1', 'Juan Soto', '+56911111111', 'juan.soto@gmail.com', 'M', '2000-06-24', 1 ),
+( '22.222.222-2', 'Jorge Peréz', '+56922222222', 'jorge.perez@gmail.com', 'M', '1998-03-12', 4 ),
+( '33.333.333-3', 'Sara Morales', '+56933333333', 'sara.morales@gmail.com', 'F', '2000-02-11', NULL );
+
+/* Queremos saber a qué se refiere el rol que posee el usuario con rut 11.111.111-1 */
+SELECT 
+  rol.nombre AS Cargo,
+  usuario.nombre AS Usuario,
+  usuario.rut AS Rut_usuario
+FROM rol 
+INNER JOIN usuario 
+ON rol.id = usuario.id_rol 
+WHERE usuario.rut = '11.111.111-1';

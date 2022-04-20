@@ -1,0 +1,41 @@
+CREATE DATABASE IF NOT EXISTS pokemonDB;
+USE pokemonDB;
+
+CREATE TABLE IF NOT EXISTS pokemones (
+  pokedex INTEGER PRIMARY KEY,
+  nombre VARCHAR(100),
+  tipo1 VARCHAR(10),
+  tipo2 VARCHAR(10)
+);
+
+CREATE TABLE IF NOT EXISTS mis_pokemones (
+  pokedex INTEGER,
+  fecha_captura DATE,
+  lugar VARCHAR(50),
+  huevo VARCHAR(10),
+  peso FLOAT(10,2),
+  estatura FLOAT(10,2),
+  FOREIGN KEY (pokedex) REFERENCES pokemones(pokedex)
+);
+
+/*INSERT CSV DATA INTO TABLE*/
+LOAD DATA INFILE '/var/lib/mysql-files/pokemonesKanto.csv'
+INTO TABLE pokemones
+FIELDS TERMINATED BY ","
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS
+(@a, @b, @c, @d) 
+SET pokedex = IF(@a = '', NULL, @a), 
+    nombre = IF(@b = '', NULL, @b), 
+    tipo1 = IF(@c = '', NULL, @c), 
+    tipo2 = IF(@d = '', NULL, @d);
+
+LOAD DATA INFILE '/var/lib/mysql-files/mis_pokemones.csv'
+INTO TABLE mis_pokemones
+FIELDS TERMINATED BY ","
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS
+(pokedex, @b, @c, @d, peso, estatura) 
+SET fecha_captura = IF(@b = '', NULL, @b), 
+    lugar = IF(@c = '', NULL, @c), 
+    huevo = IF(@d = '', NULL, @d);
