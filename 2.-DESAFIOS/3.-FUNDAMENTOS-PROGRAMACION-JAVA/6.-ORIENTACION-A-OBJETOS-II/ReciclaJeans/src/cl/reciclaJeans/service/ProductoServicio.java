@@ -27,7 +27,16 @@ public class ProductoServicio {
         if ( this.getListaProductos().size() != 0 ) {
             System.out.println("Productos disponibles: ");
             for (Producto producto : listaProductos) {
-                System.out.println(producto.toString());
+                System.out.println("Datos del producto: ");
+                System.out.println("Nombre del articulo: " + producto.getArticulo());
+                System.out.println("Codigo: " + producto.getCodigo());
+                System.out.println("Marca: " + producto.getMarca());
+                System.out.println("Color: " + producto.getColor());
+                System.out.println("Descripcion: " + producto.getDescripcion());
+                System.out.println("Precio: " + producto.getPrecio());
+                System.out.println("Talla: " + producto.getTalla());
+                System.out.println("-------------------------------------------------");
+                //System.out.println(producto.toString());
             }
         } else {
             System.out.println("+-----------------------------+");
