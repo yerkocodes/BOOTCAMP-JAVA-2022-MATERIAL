@@ -2,8 +2,7 @@ package org.example;
 
 import org.example.model.Persona;
 import org.example.services.ServicioPersona;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Map;
 import java.util.logging.Logger;
@@ -13,7 +12,26 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ServicioPersonaTest {
 
     private ServicioPersona servicioPersona = new ServicioPersona(); // Instacia para invocar a los metodos del servicio
-    private Logger logger = Logger.getLogger("org.example"); // Logger para dar informacion en el momento de la ejecucion
+    private static Logger logger = Logger.getLogger("org.example"); // Logger para dar informacion en el momento de la ejecucion
+
+    @BeforeAll
+    static void setUp() {
+        logger.info("Iniciando metodod de prueba con BeforeAll");
+    }
+    @BeforeEach
+    static void init() {
+
+    }
+
+    @AfterAll
+    static void finish() {
+
+    }
+
+    @AfterEach
+    void done() {
+
+    }
 
     //Metodos de pruebas unitarias
     @Test // Anotacion para indicar que es un metodo de prueba, de lo contrario no se ejecuta
@@ -45,23 +63,15 @@ public class ServicioPersonaTest {
         assertTrue(respuesta);
     }
 
-//    public void listarPersonas() {
-//        logger.info("Iniciando metodo de prueba eliminarPersona");
-//        Map<String, String> respuesta = servicioPersona.listarPersonas();
-//        assertNotNull(respuesta);
-//
-//        Persona persona = new Persona("27-0", "Fulanito");
-//        servicioPersona.crearPersona(persona);
-//    }
-@Test
-@DisplayName("Test metodo listarPersonas()")
-public void listarPersonas() {
-    logger.info("Iniciando metodo de prueba eliminarPersona en la clase ServicioPersonaTest");
-    Map<String, String> respuesta = servicioPersona.listarPersonas();
-    assertNotNull(respuesta); //verificando que la respuesta no sea null
-    Persona persona = new Persona("27-0","Fulanito");
-    servicioPersona.crearPersona(persona);
-    assertEquals(1,respuesta.size()); //assertEquals(esperado,actual);
-    assertNotEquals(0, respuesta.size());
-}
+    @Test
+    @DisplayName("Test metodo listarPersonas()")
+    public void listarPersonas() {
+        logger.info("Iniciando metodo de prueba eliminarPersona en la clase ServicioPersonaTest");
+        Map<String, String> respuesta = servicioPersona.listarPersonas();
+        assertNotNull(respuesta); //verificando que la respuesta no sea null
+        Persona persona = new Persona("27-0", "Fulanito");
+        servicioPersona.crearPersona(persona);
+        assertEquals(1, respuesta.size()); //assertEquals(esperado,actual);
+        assertNotEquals(0, respuesta.size());
+    }
 }
