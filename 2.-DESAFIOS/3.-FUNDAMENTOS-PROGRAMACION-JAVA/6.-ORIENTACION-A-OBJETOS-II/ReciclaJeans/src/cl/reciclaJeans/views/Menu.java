@@ -57,6 +57,7 @@ public class Menu {
                     break;
                 case "5":
                     // Code to import data.
+                    cargarDatos();
                     break;
                 case "6":
                     // Code to exit to the program.
@@ -64,6 +65,7 @@ public class Menu {
                     System.out.println("|   Hasta pronto!             |");
                     System.out.println("|   Saliendo del programa...  |");
                     System.out.println("+-----------------------------+");
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("Ha elegido una opcion no valida.");
@@ -94,5 +96,10 @@ public class Menu {
     private void exportarDatos() throws IOException {
         System.out.println("Ingresa la ruta en donde se exportara el archivo productos.csv: ");
         archivoServicio.exportarDatos(sc.nextLine(), productoServicio.getListaProductos());
+    }
+
+    private void cargarDatos() {
+        System.out.println("Ingresa la ruta en donde se encuentra el archivo, por ejemplo '/home/desafioLatam/ProductosImportados.csv': ");
+        archivoServicio.cargarDatos(sc.nextLine(), productoServicio);
     }
 }

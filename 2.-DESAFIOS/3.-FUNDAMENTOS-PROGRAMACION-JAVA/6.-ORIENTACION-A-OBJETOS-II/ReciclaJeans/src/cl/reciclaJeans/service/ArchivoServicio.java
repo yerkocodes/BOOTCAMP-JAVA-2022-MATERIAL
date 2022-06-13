@@ -5,15 +5,50 @@ package cl.reciclaJeans.service;
 
 import cl.reciclaJeans.model.Producto;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class ArchivoServicio {
-    public void cargarDatos() {
+    public void cargarDatos(String path, ProductoServicio productoServicio) {
         // CODE HERE TO IMPORT PRODUCT LIST FROM CSV FILE.
+        ArrayList<Producto> productList = new ArrayList<>();
+
+        try {
+            File archivo = new File(path);
+            FileReader fileReader = new FileReader(archivo);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String linea = bufferedReader.readLine();
+
+            while(linea != null) {
+                ArrayList<String> listaTemporal = new ArrayList<>(Arrays.asList(linea.split(",")));
+
+                Producto producto = new Producto();
+                producto.setArticulo(listaTemporal.get(0));
+                producto.setPrecio(listaTemporal.get(1));
+                producto.setDescripcion(listaTemporal.get(2));
+                producto.setCodigo(listaTemporal.get(3));
+                producto.setTalla(listaTemporal.get(4));
+                producto.setMarca(listaTemporal.get(5));
+                producto.setColor(listaTemporal.get(6));
+
+                productList.add(producto);
+                linea = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+            fileReader.close();
+
+            if (productList != null) {
+                productoServicio.getListaProductos().addAll(productList);
+                System.out.println("Datos cargados correctamente!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void exportarDatos(String path, List<Producto> listOfProducts) throws IOException {
