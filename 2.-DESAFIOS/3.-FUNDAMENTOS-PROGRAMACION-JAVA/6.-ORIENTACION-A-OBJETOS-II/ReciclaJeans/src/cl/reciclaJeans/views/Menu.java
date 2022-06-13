@@ -14,10 +14,10 @@ import cl.reciclaJeans.service.ProductoServicio;
 import java.util.Scanner;
 
 public class Menu {
+    private ProductoServicio productoServicio = new ProductoServicio();
+    private Scanner sc = new Scanner(System.in);
     public void ejecutarMenu() {
         // CODE HERE
-        ProductoServicio productoServicio = new ProductoServicio();
-        Scanner sc = new Scanner(System.in);
         String userOption = null;
         do {
             System.out.println();
@@ -46,6 +46,7 @@ public class Menu {
                     break;
                 case "3":
                     // Code to edit product.
+                    editarProducto();
                     break;
                 case "4":
                     // Code to export data.
@@ -65,5 +66,24 @@ public class Menu {
                     break;
             }
         } while (!userOption.equals("4"));
+    }
+
+    private void editarProducto() {
+        System.out.println("+-----------------------------+");
+        System.out.println("|  1. Editar producto         |");
+        System.out.println("|  2. Volver al menu          |");
+        System.out.println("+-----------------------------+");
+        String userOption = sc.nextLine();
+        switch (userOption) {
+            case "1":
+                System.out.println("Ingrese código del producto a editar:");
+                productoServicio.editarProducto(sc.nextLine(), sc);
+                break;
+            case "2":
+                break;
+            default:
+                editarProducto();
+                break;
+        }
     }
 }

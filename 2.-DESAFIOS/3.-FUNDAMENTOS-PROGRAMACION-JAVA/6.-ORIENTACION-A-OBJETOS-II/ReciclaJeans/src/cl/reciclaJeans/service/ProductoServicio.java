@@ -81,4 +81,56 @@ public class ProductoServicio {
         System.out.println("|   Producto registrado con exito!  |");
         System.out.println("+-----------------------------------+");
     }
+
+    public void editarProducto(String productCode, Scanner scanner) {
+        for ( Producto producto : getListaProductos() ) {
+            if ( producto.getCodigo().contains(productCode) ) {
+                System.out.println("1.-El nombre del articulo actual es: " + producto.getArticulo());
+                System.out.println("2.-El código del producto: " + producto.getCodigo());
+                System.out.println("3.-El color del producto: " + producto.getColor());
+                System.out.println("4.-La descripción del producto: " + producto.getDescripcion());
+                System.out.println("5.-La marca del producto: " + producto.getMarca());
+                System.out.println("6.-El precio del producto: " + producto.getPrecio());
+                System.out.println("7.-La talla del producto: " + producto.getTalla());
+
+                System.out.println("Ingrese la opción a editar de los datos del producto:");
+                switch ( scanner.nextLine() ) {
+                    case "1":
+                        System.out.println("Ingrese el nuevo nombre del articulo: ");
+                        producto.setArticulo(scanner.nextLine());
+                        break;
+                    case "2":
+                        System.out.println("Ingrese el nuevo codigo del articulo: ");
+                        producto.setCodigo(scanner.nextLine());
+                        break;
+                    case "3":
+                        System.out.println("Ingrese el nuevo color del articulo: ");
+                        producto.setColor(scanner.nextLine());
+                        break;
+                    case "4":
+                        System.out.println("Ingrese la nueva descripcion del articulo: ");
+                        producto.setDescripcion(scanner.nextLine());
+                        break;
+                    case "5":
+                        System.out.println("Ingrese la nueva marca del articulo: ");
+                        producto.setMarca(scanner.nextLine());
+                        break;
+                    case "6":
+                        System.out.println("Ingrese el nuevo precio del articulo: ");
+                        producto.setPrecio(scanner.nextLine());
+                        break;
+                    case "7":
+                        System.out.println("Ingrese la nueva talla del articulo: ");
+                        producto.setTalla(scanner.nextLine());
+                        break;
+                    default:
+                        System.out.println("Opcion no valida");
+                        editarProducto(productCode, scanner);
+                        break;
+                }
+            } else {
+                System.out.println("El producto no se encuentra en nuestros registros.");
+            }
+        }
+    }
 }
