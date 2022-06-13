@@ -9,14 +9,17 @@ package cl.reciclaJeans.views;
     Ingrese una opción:
 */
 
+import cl.reciclaJeans.service.ArchivoServicio;
 import cl.reciclaJeans.service.ProductoServicio;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     private ProductoServicio productoServicio = new ProductoServicio();
+    private ArchivoServicio archivoServicio = new ArchivoServicio();
     private Scanner sc = new Scanner(System.in);
-    public void ejecutarMenu() {
+    public void ejecutarMenu() throws IOException {
         // CODE HERE
         String userOption = null;
         do {
@@ -50,6 +53,7 @@ public class Menu {
                     break;
                 case "4":
                     // Code to export data.
+                    exportarDatos();
                     break;
                 case "5":
                     // Code to import data.
@@ -85,5 +89,10 @@ public class Menu {
                 editarProducto();
                 break;
         }
+    }
+
+    private void exportarDatos() throws IOException {
+        System.out.println("Ingresa la ruta en donde se exportara el archivo productos.csv: ");
+        archivoServicio.exportarDatos(sc.nextLine(), productoServicio.getListaProductos());
     }
 }
