@@ -26,8 +26,10 @@ public class Menu {
             System.out.println("+-----------------------------+");
             System.out.println("|   1 Listar Producto         |");
             System.out.println("|   2 Agregar Producto        |");
-            System.out.println("|   3 Exportar Datos          |");
-            System.out.println("|   4 Salir                   |");
+            System.out.println("|   3 Editar Producto         |");
+            System.out.println("|   4 Exportar Datos          |");
+            System.out.println("|   5 Importar Datos          |");
+            System.out.println("|   6 Salir                   |");
             System.out.println("+-----------------------------+");
             System.out.println();
             System.out.print("Elija una opcion: ");
@@ -43,9 +45,15 @@ public class Menu {
                     productoServicio.agregarProducto();
                     break;
                 case "3":
-                    // Code to export data.
+                    // Code to edit product.
                     break;
                 case "4":
+                    // Code to export data.
+                    break;
+                case "5":
+                    // Code to import data.
+                    break;
+                case "6":
                     // Code to exit to the program.
                     System.out.println("+-----------------------------+");
                     System.out.println("|   Hasta pronto!             |");
