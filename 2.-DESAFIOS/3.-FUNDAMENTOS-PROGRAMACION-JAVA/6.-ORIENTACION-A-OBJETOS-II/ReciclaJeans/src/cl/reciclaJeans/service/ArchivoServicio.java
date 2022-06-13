@@ -62,7 +62,8 @@ public class ArchivoServicio {
                 fw = new FileWriter(file);
                 BufferedWriter bw = new BufferedWriter(fw);
                 for (Producto product : listOfProducts) {
-                    bw.write(String.valueOf(product));
+//                    bw.write(String.valueOf(product));
+                    bw.write(product.getArticulo() + "," + product.getPrecio() + "," + product.getDescripcion() + "," + product.getCodigo() + "," + product.getTalla() + "," + product.getMarca() + "," + product.getColor());
                     bw.newLine();
                 }
                 bw.close();
