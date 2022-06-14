@@ -46,13 +46,15 @@ public class ClienteService {
         }
     }
 
-    public void agregarCliente(Cliente cliente) {
+    public boolean agregarCliente(Cliente cliente) {
         //CODE HERE
         if ( cliente.getRunCliente() != null && listaClientes != null) {
             listaClientes.add(cliente);
             Utilidad.message("Cliente agregado con exito!");
+            return true;
         } else {
             Utilidad.message("ERROR: Cliente no fue agregado");
+            return false;
         }
     }
 

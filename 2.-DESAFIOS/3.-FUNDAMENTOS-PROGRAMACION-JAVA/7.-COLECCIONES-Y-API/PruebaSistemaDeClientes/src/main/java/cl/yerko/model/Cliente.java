@@ -12,7 +12,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String runCliente, String nombreCliente, String apellidoCliente, String aniosCliente, CategoriaEnum nombreCategoria) {
+    public Cliente(String runCliente, String nombreCliente, String apellidoCliente, String aniosCliente) {
         this.runCliente = runCliente;
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;

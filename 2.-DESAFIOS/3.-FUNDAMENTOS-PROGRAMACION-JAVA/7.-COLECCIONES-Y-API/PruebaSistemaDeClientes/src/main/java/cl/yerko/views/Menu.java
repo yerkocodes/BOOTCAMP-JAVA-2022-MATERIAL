@@ -58,7 +58,7 @@ public class Menu {
                     break;
                 case "4": // Cargar datos
                     //code here
-                    cargarDatos();
+                    importarDatos();
                     break;
                 case "5": // Exportar datos
                     //code here
@@ -111,7 +111,7 @@ public class Menu {
         clienteService.editarCliente(Utilidad.validateArgumentNotNull(sc));
     }
 
-    public void cargarDatos() {
+    public void importarDatos() {
         //CODE HERE
         Utilidad.message("---------Cargar Datos en Linux o Mac-----------");
         Utilidad.message("Ingresa la ruta en donde se encuentra el archivo DBClientes.csv:");
@@ -148,7 +148,7 @@ public class Menu {
 
     public void terminarPrograma() {
         //CODE HERE
-        Utilidad.message("Adios!");
+        Utilidad.message("Hasta pronto!");
         System.exit(0);
     }
 
