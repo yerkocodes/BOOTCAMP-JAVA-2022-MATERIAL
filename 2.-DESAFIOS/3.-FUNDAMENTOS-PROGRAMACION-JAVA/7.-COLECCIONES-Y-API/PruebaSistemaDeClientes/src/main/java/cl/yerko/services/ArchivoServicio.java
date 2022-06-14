@@ -4,11 +4,10 @@ import cl.yerko.model.CategoriaEnum;
 import cl.yerko.model.Cliente;
 import cl.yerko.utilities.Utilidad;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ArchivoServicio {
 
@@ -47,10 +46,6 @@ public class ArchivoServicio {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void exportarDatos() {
 
     }
 }

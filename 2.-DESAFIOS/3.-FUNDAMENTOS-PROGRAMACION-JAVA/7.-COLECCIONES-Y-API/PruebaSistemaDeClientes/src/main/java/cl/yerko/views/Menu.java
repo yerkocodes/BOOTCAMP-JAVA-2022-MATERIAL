@@ -44,6 +44,8 @@ public class Menu {
             switch (userOption) {
                 case "1": // Listar Clientes
                     //code here
+//                    Runtime.getRuntime().exec("clear");
+                    Utilidad.limpiarPantalla();
                     listarCliente();
                     break;
                 case "2": // Agregar Cliente

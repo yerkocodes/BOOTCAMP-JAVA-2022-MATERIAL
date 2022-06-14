@@ -33,7 +33,13 @@ public class ClienteService {
         //CODE HERE
         if ( !listaClientes.isEmpty() && listaClientes != null) {
             for ( Cliente cliente : listaClientes ) {
-                Utilidad.message(String.valueOf(cliente));
+                Utilidad.message("-------------Datos del Cliente-------------");
+                Utilidad.message("RUN del cliente: " + cliente.getRunCliente());
+                Utilidad.message("Nombre del cliente: " + cliente.getNombreCliente());
+                Utilidad.message("Apellindo del cliente: " + cliente.getApellidoCliente());
+                Utilidad.message("Años como cliente: " + cliente.getAniosCliente());
+                Utilidad.message("Categoria del cliente: " + cliente.getNombreCategoria());
+                Utilidad.message("-------------------------------------------");
             }
         } else {
             Utilidad.message("La lista se encuentra vacia.");

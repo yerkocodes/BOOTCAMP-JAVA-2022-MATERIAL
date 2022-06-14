@@ -22,7 +22,7 @@ public class ExportadorCsv extends Exportador {
                 fw = new FileWriter(file);
                 BufferedWriter bw = new BufferedWriter(fw);
                 for (Cliente cliente : listaClientes) {
-                    bw.write(String.valueOf(cliente));
+                    bw.write(cliente.getRunCliente() + "," + cliente.getNombreCliente() + "," + cliente.getApellidoCliente() + "," + cliente.getAniosCliente() + "," + cliente.getNombreCategoria());
                     bw.newLine();
                 }
                 bw.close();
