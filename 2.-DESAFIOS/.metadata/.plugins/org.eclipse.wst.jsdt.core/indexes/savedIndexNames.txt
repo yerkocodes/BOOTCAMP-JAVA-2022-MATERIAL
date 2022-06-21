@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+/home/user32/Desktop/JAVA-BOOTCAMP/2.-DESAFIOS/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+1596921039.index
+2759133441.index
+193926239.index
+2172232548.index
+3566311089.index
+670292522.index
