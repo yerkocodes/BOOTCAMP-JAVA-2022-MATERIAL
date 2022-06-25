@@ -48,8 +48,10 @@ public class CursoDAO {
 
 		} catch (Exception e) {
 			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			conn.close();
 		}
-		
 
 		return listaCursos;
 	}
