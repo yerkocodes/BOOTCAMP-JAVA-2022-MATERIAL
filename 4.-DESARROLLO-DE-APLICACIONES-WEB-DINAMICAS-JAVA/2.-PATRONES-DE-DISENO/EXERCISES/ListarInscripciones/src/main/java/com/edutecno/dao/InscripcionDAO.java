@@ -30,7 +30,7 @@ public class InscripcionDAO {
 		try {
 //			"INSERT INTO inscripcion (nombre, telefono, id_curso, id_forma_pago) VALUES (?, ?, ?, ?)"
 			PreparedStatement pstm = conn.prepareStatement(
-					"INSERT INTO inscripcion (id_inscripcion, nombre, telefono, id_curso, id_forma_pago) VALUES (NULL, ?, ?, ?, ?)");
+					"INSERT INTO inscripcion (nombre, telefono, id_curso, id_forma_pago) VALUES (?, ?, ?, ?)");
 			// Seteo de valores para los signos de interrogacion en el mismo orden de la
 			// query
 			pstm.setString(1, inscripcionDTO.getNombre());
@@ -44,7 +44,7 @@ public class InscripcionDAO {
 				ResultSet rs = pstm2.executeQuery();
 				if (rs.next()) {
 					maxId = rs.getInt(1);
-					inscripcionDTO.setIdCurso(maxId);
+					inscripcionDTO.setIdInscripcion(maxId);
 				}
 			} else {
 				throw new RuntimeException("Ha ocurrido un error insertando la inscripcion");
